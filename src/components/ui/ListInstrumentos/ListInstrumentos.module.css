@@ -1,0 +1,6 @@
+.containerInstrumentosList {
+    display:flex;
+    flex-direction: column;
+    gap:3vh;
+    padding: 1rem;
+}
