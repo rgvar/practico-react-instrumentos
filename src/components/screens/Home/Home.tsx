@@ -9,5 +9,5 @@ export const Home = () => {
 
     return (
         <ListInstrumentos  items={items} />
-  )
+    )
 }

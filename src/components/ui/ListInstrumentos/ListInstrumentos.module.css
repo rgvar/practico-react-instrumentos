@@ -1,6 +1,8 @@
 .containerInstrumentosList {
+    background-color: whitesmoke;
     display:flex;
     flex-direction: column;
-    gap:3vh;
+    align-items: center;
     padding: 1rem;
+
 }

@@ -3,24 +3,34 @@
 }
 
 .containerInstrumento {
+    background-color: white;
     display: flex;
     flex-direction: row;
-    gap: 1rem ;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    gap: 1rem;
+    border: 1px solid rgba(0,0,0,0.1);
     padding:1rem;
-
+    width: 50vw;
+    border-radius: 1rem;
+    transition: 0.1s ease-in-out;
+}
+.containerInstrumento:hover {
+    cursor:pointer;
+    color:rgb(25, 125, 255);
 }
 
-
+.instrumentoImg {
+    object-fit: none;
+}
 
 .instrumentoTitle {
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 1.6rem;
     font-style: normal;
 }
 
 .instrumentoPrice {
     font-size:1.5rem;
+    font-weight: 600;
+    color:black;
 }
 
 .instrumentoEnvioGratis {
@@ -31,4 +41,8 @@
 
 .instrumentoEnvio {
     color: orange;
+}
+
+.instrumentoCantidadVendida {
+    color:black;
 }
