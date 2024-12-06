@@ -1,13 +1,19 @@
-import { IInstrumento } from "../../../types/Instrumento"
 import { ListInstrumentos } from "../../ui/ListInstrumentos/ListInstrumentos"
-import instrumentosData from "../../../data/instrumentos.json"
+import { useEffect, useState } from "react";
 
 
 export const Home = () => {
 
-    const items : IInstrumento[] = instrumentosData.instrumentos as IInstrumento[];
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/instrumentos')
+            .then(response => response.json())
+            .then(data => setData(data))
+            .catch(error => console.error('Error fetching data:', error));
+    }, []);
 
     return (
-        <ListInstrumentos  items={items} />
+        <ListInstrumentos  items={data} />
     )
 }

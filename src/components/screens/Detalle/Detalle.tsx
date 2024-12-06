@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { IInstrumento } from "../../../types/Instrumento";
 import { useNavigate, useParams } from "react-router-dom";
-import data from "../../../data/instrumentos.json"
 import styles from "./Detalle.module.css";
 import Button from "react-bootstrap/Button";
 
@@ -9,12 +8,13 @@ import Button from "react-bootstrap/Button";
 export const Detalle = () => {
 
     const [item, setItem] = useState<IInstrumento | null>(null);
-
     const {id} = useParams();
 
     const getInstrumentoById = () => {
-        const result = data.instrumentos.find( (i) => i.id === id);
-        result ? setItem(result) : setItem(null);
+        fetch(`http://localhost:8080/instrumentos/${id}`)
+            .then(response => response.json())
+            .then(data => setItem(data))
+            .catch(error => console.error('Error fetching data:', error));
     };
 
     useEffect(() => {
