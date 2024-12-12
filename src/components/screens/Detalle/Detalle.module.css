@@ -2,10 +2,22 @@
 
 .parentContainer {
     background-color: whitesmoke;
-    height: 100vh;
+    height: 92vh;
     display: flex;
     justify-content: center;
     align-items:baseline;
+    
+}
+
+.containerProducto {
+    background-color: white;
+    width: 60rem;
+    min-height: 60vh;
+    margin:1rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    border-radius: 1rem;
     
 }
 
@@ -32,25 +44,23 @@
     border-top: 0.5px solid lightgray;
 }
 
-.containerProducto {
-    background-color: white;
-    width: 60rem;
-    margin:1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 1px solid lightgray;
-    border-radius: 1rem;
-    
-}
+
 .containerProductoPrincipal {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: baseline;
     align-items: center;
     width: 60%;
+    min-height: 60vh;
     gap: 1rem;
     padding: 1rem;
+}
+
+.productoImagen {
+    max-width: 100%;        
+    max-height: 100%;      
+    object-fit: contain;    
+    width: auto; 
 }
 
 .productoDescripcion {
@@ -68,17 +78,20 @@
 .containerProductoDetalle {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
     width: 40%;
     border-left: 1px solid lightgray;
+    padding-top: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     
 }
+
 .containerProductoDetalle ul {
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    align-items: left ;
+    align-items: left;
     gap: 0.6rem;
 
 }
@@ -101,7 +114,15 @@
     color: orange;
 }
 
-.containerProductoDetalle Button {
+.buttonContainer {
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonContainer Button {
     width: 50%;
     margin-top: 2rem;
 }
+

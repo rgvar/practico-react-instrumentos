@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import { Home } from "../components/screens/Home/Home"
 import { Detalle } from "../components/screens/Detalle/Detalle"
+import { Agregar } from "../components/screens/Agregar/Agregar"
 
 
 export const AppRouter = () => {
@@ -12,6 +13,7 @@ export const AppRouter = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/detalle/:id" element={<Detalle />} />
+                <Route path="/add" element={<Agregar />} />
             </Routes>
         </>
     )

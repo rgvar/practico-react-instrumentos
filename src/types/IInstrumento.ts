@@ -1,5 +1,5 @@
 export interface IInstrumento {
-    id: string,
+    id:number,
     instrumento: string,
     marca:string,
     modelo:string,
@@ -8,4 +8,7 @@ export interface IInstrumento {
     costoEnvio: string,
     cantidadVendida: string,
     descripcion: string,
+    categoria: {
+        id: number;
+    }
 }
