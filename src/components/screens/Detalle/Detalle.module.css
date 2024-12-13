@@ -1,8 +1,4 @@
-
-
 .parentContainer {
-    background-color: whitesmoke;
-    height: 92vh;
     display: flex;
     justify-content: center;
     align-items:baseline;
@@ -25,9 +21,11 @@
     background-color: rgb(243, 243, 243);
     padding:5px;
     border-radius: 1rem 1rem 0 0;
+    display:flex;
+    justify-content: space-between;
 }
 
-.buttonVolver {
+.buttonTopBar {
     border:0;
     background-color: rgb(242, 242, 242);
     color: rgb(54, 54, 54);
@@ -35,7 +33,7 @@
     margin: 5px;
     transition: 0.1s ease-in-out;
 }
-.buttonVolver:hover {
+.buttonTopBar:hover {
     color:rgb(25, 125, 255);
 }
 
@@ -57,8 +55,8 @@
 }
 
 .productoImagen {
-    max-width: 100%;        
-    max-height: 100%;      
+    max-width: 20rem;        
+    max-height: 20rem;      
     object-fit: contain;    
     width: auto; 
 }

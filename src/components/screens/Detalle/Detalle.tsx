@@ -3,6 +3,7 @@ import { IInstrumento } from "../../../types/IInstrumento";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./Detalle.module.css";
 import Button from "react-bootstrap/Button";
+import { API_ENDPOINTS } from "../../../apiConfig";
 
 
 export const Detalle = () => {
@@ -11,7 +12,7 @@ export const Detalle = () => {
     const { id } = useParams();
 
     const getInstrumentoById = () => {
-        fetch(`http://localhost:8080/instrumentos/${id}`)
+        fetch(`${API_ENDPOINTS.instrumentos}/${id}`)
             .then(response => response.json())
             .then(data => setItem(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -25,6 +26,9 @@ export const Detalle = () => {
     const handleVolver = () => {
         navigate(-1);
     };
+    const handleEditar = () => {
+        navigate(`/detalle/edit/${id}`);
+    };
 
 
     return (
@@ -35,7 +39,8 @@ export const Detalle = () => {
                     <div className={styles.containerProducto}>
                         
                         <div className={styles.topBarProducto}>
-                            <button className={styles.buttonVolver} onClick={handleVolver}>Volver</button>
+                            <button className={styles.buttonTopBar} onClick={handleVolver}>Volver</button>
+                            <button className={styles.buttonTopBar} onClick={handleEditar}>Editar</button>
                         </div>
                         
                         <div className={styles.botProducto}>
@@ -66,7 +71,7 @@ export const Detalle = () => {
                                     </div>
 
                                     <li>
-                                        {item.costoEnvio == 'G'
+                                        {item.costoEnvio == 'G' || item.costoEnvio === '0'
                                             ? <div className={styles.envioGratis}><img src={`/assets/img/camion.png`} /> Envío Gratis a todo el país</div>
                                             : <div className={styles.envioNormal}>Costo Envio: ${item.costoEnvio}</div>
                                         }

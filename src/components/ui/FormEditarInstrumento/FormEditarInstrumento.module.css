@@ -1,7 +1,5 @@
 .formContainer {
     background-color: whitesmoke;
-    height: 94vh;
-
     display:flex;
     align-items: flex-start;
     justify-content: center;

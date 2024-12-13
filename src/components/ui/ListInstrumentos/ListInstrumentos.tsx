@@ -4,9 +4,10 @@ import styles from "./ListInstrumentos.module.css"
 
 interface IListItems<T> {
     items: T[];
+    message: String;
 }
 
-export const ListInstrumentos  = ({items}: IListItems<IInstrumento>) => {
+export const ListInstrumentos  = ({items, message}: IListItems<IInstrumento>) => {
 
     return (
         <div className={styles.containerInstrumentosList} >
@@ -16,7 +17,7 @@ export const ListInstrumentos  = ({items}: IListItems<IInstrumento>) => {
                         <Instrumento key={index} instrumento={item} />
                     ))
                 ) : (
-                    <div>No hay artículos para mostrar</div>
+                    <div className={styles.messageList}><p>{message}</p></div>
                 )
             }
         </div>

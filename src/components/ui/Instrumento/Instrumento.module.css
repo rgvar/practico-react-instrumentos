@@ -21,6 +21,11 @@
 .imgContainer {
     max-width: 10rem;
     max-height: 10rem;
+    min-width: 10rem;
+    min-height: 10rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .instrumentoImg {
