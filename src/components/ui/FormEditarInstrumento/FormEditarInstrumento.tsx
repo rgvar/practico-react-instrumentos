@@ -10,13 +10,13 @@ interface FormEditarInstrumentoProps {
     instrumento: IInstrumento;
 }
 
-export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps) => {
+export const FormEditarInstrumento = ({ instrumento }: FormEditarInstrumentoProps) => {
 
     const [formData, setFormData] = useState<IInstrumento>(instrumento);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement >) => {
-        const {name, value} = e.target;
-        setFormData({...formData, [name]: value});
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -32,7 +32,12 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    ...formData,
+                    categoria: {
+                        id: formData.categoria
+                    },
+                }),
             });
 
             if (response.ok) {
@@ -55,7 +60,7 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
                 <Form.Group className="mb-2" controlId="formInstrumento">
                     <Form.Label>Instrumento</Form.Label>
                     <Form.Control
-                        type="text" 
+                        type="text"
                         placeholder="Ingrese nombre del instrumento"
                         onChange={handleChange}
                         name="instrumento"
@@ -65,8 +70,8 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
 
                 <Form.Group className="mb-2" controlId="formMarca">
                     <Form.Label>Marca</Form.Label>
-                    <Form.Control 
-                        type="text" 
+                    <Form.Control
+                        type="text"
                         placeholder="Ingrese la marca"
                         onChange={handleChange}
                         name="marca"
@@ -76,8 +81,8 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
 
                 <Form.Group className="mb-2" controlId="formModelo">
                     <Form.Label>Modelo</Form.Label>
-                    <Form.Control 
-                        type="text" 
+                    <Form.Control
+                        type="text"
                         placeholder="Ingrese el modelo"
                         onChange={handleChange}
                         name="modelo"
@@ -87,12 +92,12 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
 
                 <Form.Group className="mb-2" controlId="formImagen">
                     <Form.Label>Imagen</Form.Label>
-                    <Form.Control 
-                        type="text" 
+                    <Form.Control
+                        type="text"
                         placeholder="Ingrese la url de la imagen"
                         onChange={handleChange}
                         name="imagen"
-                        value={formData.imagen}  
+                        value={formData.imagen}
                     />
                     <Form.Text className="text-muted">
                         Ejemplo: guitarra.jpg
@@ -101,8 +106,8 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
 
                 <Form.Group className="mb-2" controlId="formPrecio">
                     <Form.Label>Precio</Form.Label>
-                    <Form.Control 
-                        type="number" 
+                    <Form.Control
+                        type="number"
                         placeholder="Ingrese el precio"
                         onChange={handleChange}
                         name="precio"
@@ -112,8 +117,8 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
 
                 <Form.Group className="mb-2" controlId="formCostoEnvio">
                     <Form.Label>Costo de Envío</Form.Label>
-                    <Form.Control 
-                        type="number" 
+                    <Form.Control
+                        type="number"
                         placeholder="Ingrese el costo del envío"
                         onChange={handleChange}
                         name="costoEnvio"
@@ -123,11 +128,11 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
 
                 <Form.Group className="mb-2" controlId="formDescripcion">
                     <Form.Label>Descripción</Form.Label>
-                    <Form.Control 
-                        as="textarea" 
-                        rows={3} 
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
                         placeholder="Agregue una descripción del instrumento"
-                        style={{resize: 'none'}}
+                        style={{ resize: 'none' }}
                         onChange={handleChange}
                         name="descripcion"
                         value={formData.descripcion}
@@ -140,14 +145,14 @@ export const FormEditarInstrumento = ({instrumento}: FormEditarInstrumentoProps)
                     <Form.Select
                         name="categoria"
                         value={formData.categoria.id}
-                        onChange={handleChange}
-                    >
+                        onChange={handleChange}>
+
                         <option value="1">Cuerda</option>
                         <option value="2">Viento</option>
                         <option value="3">Percusión</option>
                         <option value="4">Teclado</option>
                         <option value="5">Electrónico</option>
-                        <option value="10">Otro</option>
+                        <option value="6">Otro</option>
                     </Form.Select>
                 </Form.Group>
 

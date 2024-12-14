@@ -18,7 +18,7 @@ export const Search = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (searchData === '') {
             await fetch(API_ENDPOINTS.instrumentos)
                 .then(response => response.json())

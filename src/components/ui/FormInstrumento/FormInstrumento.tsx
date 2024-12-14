@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import styles from './FormInstrumento.module.css'
 import { useState } from 'react';
 import { INuevoInstrumento } from '../../../types/IInstrumento';
+import { API_ENDPOINTS } from '../../../apiConfig';
 
 const instrumentoDefault = {
     instrumento: '',
@@ -14,7 +15,7 @@ const instrumentoDefault = {
     cantidadVendida: '0',
     descripcion: '',
     categoria: {
-        id: 10,
+        id: -1,
     }
 };
 
@@ -22,20 +23,21 @@ export const FormInstrumento = () => {
 
     const [formData, setFormData] = useState<INuevoInstrumento>(instrumentoDefault);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement >) => {
-        const {name, value} = e.target;
-        setFormData({...formData, [name]: value});
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (formData.descripcion.length > 600) {
-            alert("La descripción no puede exceder los 600 caracteres. ");
+
+        if (formData.descripcion.length > 800) {
+            alert("La descripción no puede exceder los 800 caracteres. ");
             return;
         }
 
         try {
-            const response = await fetch('http://localhost:8080/instrumentos', {
+            const response = await fetch(API_ENDPOINTS.instrumentos, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,12 +62,12 @@ export const FormInstrumento = () => {
                     cantidadVendida: '0',
                     descripcion: '',
                     categoria: {
-                        id: 10,
+                        id: -1,
                     }
                 });
             } else {
                 alert('Error al agregar el instrumento. ');
-                console.log('Error', response.statusText);
+                console.log('Error 02', response.statusText);
             }
         } catch (error) {
             console.error('Error en la petición: ', error);
@@ -80,8 +82,8 @@ export const FormInstrumento = () => {
                 </Form.Group>
                 <Form.Group className="mb-2" controlId="formInstrumento">
                     <Form.Label>Instrumento</Form.Label>
-                    <Form.Control 
-                        type="text" 
+                    <Form.Control
+                        type="text"
                         placeholder="Ingrese nombre del instrumento"
                         onChange={handleChange}
                         name="instrumento"
@@ -90,31 +92,31 @@ export const FormInstrumento = () => {
 
                 <Form.Group className="mb-2" controlId="formMarca">
                     <Form.Label>Marca</Form.Label>
-                    <Form.Control 
-                        type="text" 
+                    <Form.Control
+                        type="text"
                         placeholder="Ingrese la marca"
                         onChange={handleChange}
-                        name="marca"    
+                        name="marca"
                     />
                 </Form.Group>
 
                 <Form.Group className="mb-2" controlId="formModelo">
                     <Form.Label>Modelo</Form.Label>
-                    <Form.Control 
-                        type="text" 
+                    <Form.Control
+                        type="text"
                         placeholder="Ingrese el modelo"
                         onChange={handleChange}
-                        name="modelo"    
+                        name="modelo"
                     />
                 </Form.Group>
 
                 <Form.Group className="mb-2" controlId="formImagen">
                     <Form.Label>Imagen</Form.Label>
-                    <Form.Control 
-                        type="text" 
+                    <Form.Control
+                        type="text"
                         placeholder="Ingrese la url de la imagen"
                         onChange={handleChange}
-                        name="imagen"    
+                        name="imagen"
                     />
                     <Form.Text className="text-muted">
                         Ejemplo: guitarra.jpg
@@ -123,31 +125,31 @@ export const FormInstrumento = () => {
 
                 <Form.Group className="mb-2" controlId="formPrecio">
                     <Form.Label>Precio</Form.Label>
-                    <Form.Control 
-                        type="number" 
+                    <Form.Control
+                        type="number"
                         placeholder="Ingrese el precio"
                         onChange={handleChange}
-                        name="precio"    
+                        name="precio"
                     />
                 </Form.Group>
 
                 <Form.Group className="mb-2" controlId="formCostoEnvio">
                     <Form.Label>Costo de Envío</Form.Label>
-                    <Form.Control 
-                        type="number" 
+                    <Form.Control
+                        type="number"
                         placeholder="Ingrese el costo del envío"
                         onChange={handleChange}
-                        name="costoEnvio"    
+                        name="costoEnvio"
                     />
                 </Form.Group>
 
                 <Form.Group className="mb-2" controlId="formDescripcion">
                     <Form.Label>Descripción</Form.Label>
-                    <Form.Control 
-                        as="textarea" 
-                        rows={3} 
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
                         placeholder="Agregue una descripción del instrumento"
-                        style={{resize: 'none'}}
+                        style={{ resize: 'none' }}
                         onChange={handleChange}
                         name="descripcion"
                     />
@@ -166,7 +168,7 @@ export const FormInstrumento = () => {
                         <option value="3">Percusión</option>
                         <option value="4">Teclado</option>
                         <option value="5">Electrónico</option>
-                        <option value="10">Otro</option>
+                        <option value="6">Otro</option>
                     </Form.Select>
                 </Form.Group>
 

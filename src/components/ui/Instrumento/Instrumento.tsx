@@ -16,7 +16,7 @@ export const Instrumento = ({ instrumento }: ICardInstrumento) => {
 
     return (
         <div className={styles.containerInstrumento} onClick={handleNavigateDetalle}>
-            <div className={styles.imgContainer}><img className={styles.instrumentoImg} src={`assets/img/${instrumento.imagen}`}/></div>
+            <div className={styles.imgContainer}><img className={styles.instrumentoImg} src={`/assets/img/${instrumento.imagen}`} /></div>
             <div className={styles.containerInstrumentoBody}>
                 <div className={styles.instrumentoTitle} >{instrumento.instrumento}</div>
                 <div>
@@ -26,12 +26,12 @@ export const Instrumento = ({ instrumento }: ICardInstrumento) => {
                                 ? (<p>$ {instrumento.precio}</p>)
                                 : (<p>Gratis</p>)
                         }
-                        
+
                     </div>
                     <div>
                         {
                             instrumento.costoEnvio === 'G' || instrumento.costoEnvio === '0'
-                                ? (<div className={styles.instrumentoEnvioGratis}><img src="assets/img/camion.png"/>Envío gratis a todo el país</div>) 
+                                ? (<div className={styles.instrumentoEnvioGratis}><img src="/assets/img/camion.png" />Envío gratis a todo el país</div>)
                                 : (<div className={styles.instrumentoEnvio}><p>Costo de Envío Interior de Argentina: ${instrumento.costoEnvio}</p></div>)
                         }
                     </div>
@@ -42,8 +42,8 @@ export const Instrumento = ({ instrumento }: ICardInstrumento) => {
                                 : (<p>Sin artículos vendidos</p>)
                         }
                     </div>
-                    
-                    
+
+
                 </div>
             </div>
         </div>

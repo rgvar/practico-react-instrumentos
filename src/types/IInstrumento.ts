@@ -9,8 +9,8 @@ export interface IInstrumento {
     cantidadVendida: string,
     descripcion: string,
     categoria: {
-        id: number;
-    };
+        id: number
+    }
 }
 
 export interface INuevoInstrumento {
@@ -23,6 +23,6 @@ export interface INuevoInstrumento {
     cantidadVendida: string,
     descripcion: string,
     categoria: {
-        id: number;
-    };
+        id: number
+    }
 }

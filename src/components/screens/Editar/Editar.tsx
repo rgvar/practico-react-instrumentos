@@ -12,12 +12,12 @@ export const Editar = () => {
     const getInstrumentoById = () => {
         try {
             fetch(`${API_ENDPOINTS.instrumentos}/${id}`)
-            .then(response => response.json())
-            .then(data => setItem(data));
+                .then(response => response.json())
+                .then(data => setItem(data));
         } catch (error) {
             console.error(error);
         }
-        
+
     };
 
     useEffect(() => {
