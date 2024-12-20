@@ -6,11 +6,9 @@ export interface IInstrumento {
     imagen:string,
     precio: string,
     costoEnvio: string,
-    cantidadVendida: string,
+    cantidadVendida: number,
     descripcion: string,
-    categoria: {
-        id: number
-    }
+    idCategoria: number
 }
 
 export interface INuevoInstrumento {
@@ -20,9 +18,7 @@ export interface INuevoInstrumento {
     imagen:string,
     precio: string,
     costoEnvio: string,
-    cantidadVendida: string,
+    cantidadVendida: number,
     descripcion: string,
-    categoria: {
-        id: number
-    }
+    idCategoria: number
 }

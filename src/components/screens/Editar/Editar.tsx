@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_ENDPOINTS } from "../../../apiConfig";
 import { useEffect, useState } from "react";
 import { IInstrumento } from "../../../types/IInstrumento";
 import { FormEditarInstrumento } from "../../ui/FormEditarInstrumento/FormEditarInstrumento";
+import styles from './Editar.module.css'
 
 export const Editar = () => {
 
@@ -24,13 +25,21 @@ export const Editar = () => {
         getInstrumentoById();
     }, []);
 
+    const navigate = useNavigate();
+    const handleVolver = () => {
+        navigate(-1);
+    };
+
     if (!item) {
         return <p>Cargando ...</p>
     }
 
     return (
-        <>
-            <FormEditarInstrumento instrumento={item} />
-        </>
+        <div className={styles.editarContainer}>
+            <div className={styles.formEditarContainer}>
+                <FormEditarInstrumento instrumento={item} />
+            </div>
+            <button className={styles.buttonVolver} onClick={handleVolver}>Volver</button>
+        </div>
     )
 }

@@ -5,4 +5,5 @@ export const API_ENDPOINTS = {
     instrumentos: `${API_BASE_URL}/instrumentos`,
     categorias: `${API_BASE_URL}/instrumentos/categoria`,
     search: `${API_BASE_URL}/instrumentos/search`,
+    venta: `${API_BASE_URL}/instrumentos/venta`
 };

@@ -1,39 +1,42 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ListInstrumentos } from "../../ui/ListInstrumentos/ListInstrumentos"
 import { IInstrumento } from "../../../types/IInstrumento"
-import { API_ENDPOINTS } from "../../../apiConfig";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import styles from './Search.module.css';
+import { useNavigate, useParams } from "react-router-dom";
+import { searchInstrumentos } from "../../../api/ApiGateway";
 
 export const Search = () => {
 
     const [data, setData] = useState<IInstrumento[]>([]);
     const [searchData, setSearchData] = useState<String>('');
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        setSearchData(value)
+    const { search } = useParams<{search: string}>();
+    const navigate = useNavigate();
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchData(e.target.value);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (searchData === '') {
-            await fetch(API_ENDPOINTS.instrumentos)
-                .then(response => response.json())
-                .then(data => setData(data))
-                .catch(error => console.error('Error fetching data: ', error));
-            return;
-        }
+        const fetchData = async () => {
+            setData(await searchInstrumentos(search || '') as IInstrumento[]);
 
-        await fetch(`${API_ENDPOINTS.search}/${searchData.toLowerCase()}`)
-            .then(response => response.json())
-            .then(data => setData(data))
-            .catch(error => console.error('Error fetching data: ', error));
-
+        };
+        fetchData();
+        navigate(`/search/${searchData}`)
     };
 
+    useEffect( () => {
+        const fetchData = async () => {
+            setData(await searchInstrumentos(search || '') as IInstrumento[]);
+
+        };
+        fetchData();
+
+    }, [search]);
 
 
     return (

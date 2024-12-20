@@ -23,7 +23,7 @@ export const Instrumento = ({ instrumento }: ICardInstrumento) => {
                     <div className={styles.instrumentoPrice}>
                         {
                             parseFloat(instrumento.precio) > 0
-                                ? (<p>$ {instrumento.precio}</p>)
+                                ? (<p>US${instrumento.precio}</p>)
                                 : (<p>Gratis</p>)
                         }
 
@@ -32,12 +32,12 @@ export const Instrumento = ({ instrumento }: ICardInstrumento) => {
                         {
                             instrumento.costoEnvio === 'G' || instrumento.costoEnvio === '0'
                                 ? (<div className={styles.instrumentoEnvioGratis}><img src="/assets/img/camion.png" />Envío gratis a todo el país</div>)
-                                : (<div className={styles.instrumentoEnvio}><p>Costo de Envío Interior de Argentina: ${instrumento.costoEnvio}</p></div>)
+                                : (<div className={styles.instrumentoEnvio}><p>Costo de Envío Interior de Argentina US${instrumento.costoEnvio}</p></div>)
                         }
                     </div>
                     <div className={styles.instrumentoCantidadVendida}>
                         {
-                            parseInt(instrumento.cantidadVendida) > 0
+                            instrumento.cantidadVendida > 0
                                 ? (<p>{instrumento.cantidadVendida} vendidos</p>)
                                 : (<p>Sin artículos vendidos</p>)
                         }

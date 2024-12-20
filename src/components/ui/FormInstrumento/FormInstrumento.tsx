@@ -12,11 +12,9 @@ const instrumentoDefault = {
     imagen: '',
     precio: '',
     costoEnvio: '',
-    cantidadVendida: '0',
+    cantidadVendida: 0,
     descripcion: '',
-    categoria: {
-        id: -1,
-    }
+    idCategoria: 0
 };
 
 export const FormInstrumento = () => {
@@ -31,43 +29,30 @@ export const FormInstrumento = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (formData.idCategoria === 0) {
+            alert("Selecciona una categoría. ")
+            return;
+        }
         if (formData.descripcion.length > 800) {
-            alert("La descripción no puede exceder los 800 caracteres. ");
+            alert("La descripción no puede exceder los 700 caracteres. ");
             return;
         }
 
-        try {
+        try {     
             const response = await fetch(API_ENDPOINTS.instrumentos, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    ...formData,
-                    categoria: {
-                        id: formData.categoria,
-                    }
-                }),
+                body: JSON.stringify(formData),
             });
 
             if (response.ok) {
                 alert('Instrumento agregado con éxito. ');
-                setFormData({
-                    instrumento: '',
-                    marca: '',
-                    modelo: '',
-                    imagen: '',
-                    precio: '',
-                    costoEnvio: '',
-                    cantidadVendida: '0',
-                    descripcion: '',
-                    categoria: {
-                        id: -1,
-                    }
-                });
+                setFormData(instrumentoDefault);
             } else {
                 alert('Error al agregar el instrumento. ');
-                console.log('Error 02', response.statusText);
+                console.log('Error', response.statusText);
             }
         } catch (error) {
             console.error('Error en la petición: ', error);
@@ -87,6 +72,7 @@ export const FormInstrumento = () => {
                         placeholder="Ingrese nombre del instrumento"
                         onChange={handleChange}
                         name="instrumento"
+                        value={formData.instrumento}
                     />
                 </Form.Group>
 
@@ -97,6 +83,7 @@ export const FormInstrumento = () => {
                         placeholder="Ingrese la marca"
                         onChange={handleChange}
                         name="marca"
+                        value={formData.marca}
                     />
                 </Form.Group>
 
@@ -107,6 +94,7 @@ export const FormInstrumento = () => {
                         placeholder="Ingrese el modelo"
                         onChange={handleChange}
                         name="modelo"
+                        value={formData.modelo}
                     />
                 </Form.Group>
 
@@ -117,6 +105,7 @@ export const FormInstrumento = () => {
                         placeholder="Ingrese la url de la imagen"
                         onChange={handleChange}
                         name="imagen"
+                        value={formData.imagen}
                     />
                     <Form.Text className="text-muted">
                         Ejemplo: guitarra.jpg
@@ -127,9 +116,10 @@ export const FormInstrumento = () => {
                     <Form.Label>Precio</Form.Label>
                     <Form.Control
                         type="number"
-                        placeholder="Ingrese el precio"
+                        placeholder="Ingrese el precio US$"
                         onChange={handleChange}
                         name="precio"
+                        value={formData.precio}
                     />
                 </Form.Group>
 
@@ -137,9 +127,10 @@ export const FormInstrumento = () => {
                     <Form.Label>Costo de Envío</Form.Label>
                     <Form.Control
                         type="number"
-                        placeholder="Ingrese el costo del envío"
+                        placeholder="Ingrese el costo del envío US$"
                         onChange={handleChange}
                         name="costoEnvio"
+                        value={formData.costoEnvio}
                     />
                 </Form.Group>
 
@@ -152,23 +143,25 @@ export const FormInstrumento = () => {
                         style={{ resize: 'none' }}
                         onChange={handleChange}
                         name="descripcion"
+                        value={formData.descripcion}
                     />
-                    <Form.Text className="text-muted">Máximo 500 caracteres</Form.Text>
+                    <Form.Text className="text-muted">Máximo 600 caracteres</Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-2" controlId="formCategoria">
                     <Form.Label>Categoria</Form.Label>
                     <Form.Select
-                        name="categoria"
-                        value={formData.categoria.id}
+                        name="idCategoria"
+                        value={formData.idCategoria}
                         onChange={handleChange}
                     >
-                        <option value="1">Cuerda</option>
-                        <option value="2">Viento</option>
-                        <option value="3">Percusión</option>
-                        <option value="4">Teclado</option>
-                        <option value="5">Electrónico</option>
-                        <option value="6">Otro</option>
+                        <option value={0}>Categoría</option>
+                        <option value={1}>Cuerda</option>
+                        <option value={2}>Viento</option>
+                        <option value={3}>Percusión</option>
+                        <option value={4}>Teclado</option>
+                        <option value={5}>Electrónico</option>
+                        <option value={6}>Otro</option>
                     </Form.Select>
                 </Form.Group>
 

@@ -25,7 +25,7 @@
     justify-content: space-between;
 }
 
-.buttonTopBar {
+.buttonTopBar, .buttonTopBarEliminar {
     border:0;
     background-color: rgb(242, 242, 242);
     color: rgb(54, 54, 54);
@@ -35,6 +35,10 @@
 }
 .buttonTopBar:hover {
     color:rgb(25, 125, 255);
+}
+
+.buttonTopBarEliminar:hover {
+    color:rgb(235, 0, 0);
 }
 
 .botProducto {

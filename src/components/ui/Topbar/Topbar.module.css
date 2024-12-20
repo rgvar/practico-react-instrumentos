@@ -7,6 +7,9 @@
     background-color: rgb(224, 224, 224);
     padding: 0.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
 }
 
@@ -34,12 +37,34 @@
     color: rgb(48, 48, 48);
     text-decoration: none;
     font-size: 1.2rem;
-    font-weight: 400;
+    font-weight: 500;
     transition: color 0.1s;
 }
 
 .navbarLinks li:hover,
 .navbarLinks li a:hover {
+    cursor: pointer;
+    color: rgb(150, 150, 150);
+}
+
+.cartContainer {
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+
+}
+
+.cartContainer a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    transition: color 0.1s;
+    color: rgb(48, 48, 48);
+    display:flex;
+    gap:2px;
+}
+
+.cartContainer a:hover {
     cursor: pointer;
     color: rgb(150, 150, 150);
 }

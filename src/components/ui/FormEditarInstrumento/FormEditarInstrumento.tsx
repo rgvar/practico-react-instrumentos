@@ -4,6 +4,7 @@ import styles from './FormEditarInstrumento.module.css'
 import { useState } from 'react';
 import { IInstrumento } from '../../../types/IInstrumento';
 import { API_ENDPOINTS } from '../../../apiConfig';
+import { useNavigate } from 'react-router-dom';
 
 
 interface FormEditarInstrumentoProps {
@@ -19,10 +20,17 @@ export const FormEditarInstrumento = ({ instrumento }: FormEditarInstrumentoProp
         setFormData({ ...formData, [name]: value });
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (formData.descripcion.length > 600) {
-            alert("La descripción no puede exceder los 600 caracteres. ");
+
+        if (formData.idCategoria === 0) {
+            alert("Selecciona una categoría. ");
+            return;
+        }
+        if (formData.descripcion.length > 800) {
+            alert("La descripción no puede exceder los 800 caracteres. ");
             return;
         }
 
@@ -32,20 +40,18 @@ export const FormEditarInstrumento = ({ instrumento }: FormEditarInstrumentoProp
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    ...formData,
-                    categoria: {
-                        id: formData.categoria
-                    },
-                }),
+                body: JSON.stringify(formData),
             });
 
             if (response.ok) {
-                alert('Instrumento actualizado. ');
+                alert('Instrumento editado con éxito. ');
+                navigate(`/detalle/${instrumento.id}`);
+                
             } else {
-                alert('Error al actualizar el instrumento. ');
-                console.error('Error', response.statusText);
+                alert('Error al editar el instrumento. ');
+                console.log('Error', response.statusText);
             }
+
         } catch (error) {
             console.error('Error en la petición: ', error);
         }
@@ -105,7 +111,7 @@ export const FormEditarInstrumento = ({ instrumento }: FormEditarInstrumentoProp
                 </Form.Group>
 
                 <Form.Group className="mb-2" controlId="formPrecio">
-                    <Form.Label>Precio</Form.Label>
+                    <Form.Label>Precio US$</Form.Label>
                     <Form.Control
                         type="number"
                         placeholder="Ingrese el precio"
@@ -116,7 +122,7 @@ export const FormEditarInstrumento = ({ instrumento }: FormEditarInstrumentoProp
                 </Form.Group>
 
                 <Form.Group className="mb-2" controlId="formCostoEnvio">
-                    <Form.Label>Costo de Envío</Form.Label>
+                    <Form.Label>Costo de Envío US$</Form.Label>
                     <Form.Control
                         type="number"
                         placeholder="Ingrese el costo del envío"
@@ -137,22 +143,24 @@ export const FormEditarInstrumento = ({ instrumento }: FormEditarInstrumentoProp
                         name="descripcion"
                         value={formData.descripcion}
                     />
-                    <Form.Text className="text-muted">Máximo 500 caracteres</Form.Text>
+                    <Form.Text className="text-muted">Máximo 700 caracteres</Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-2" controlId="formCategoria">
-                    <Form.Label>Categoria</Form.Label>
+                    <Form.Label>Categoría</Form.Label>
                     <Form.Select
-                        name="categoria"
-                        value={formData.categoria.id}
-                        onChange={handleChange}>
+                        name="idCategoria"
+                        value={formData.idCategoria}
+                        onChange={handleChange}
+                    >
 
-                        <option value="1">Cuerda</option>
-                        <option value="2">Viento</option>
-                        <option value="3">Percusión</option>
-                        <option value="4">Teclado</option>
-                        <option value="5">Electrónico</option>
-                        <option value="6">Otro</option>
+                        <option value={0}>Categoría</option>
+                        <option value={1}>Cuerda</option>
+                        <option value={2}>Viento</option>
+                        <option value={3}>Percusión</option>
+                        <option value={4}>Teclado</option>
+                        <option value={5}>Electrónico</option>
+                        <option value={6}>Otro</option>
                     </Form.Select>
                 </Form.Group>
 
